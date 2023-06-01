@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "Discord Image Downloader",
+  "version": "1.0",
+
+  "description": "Image download button for Discord messages",
+  "icons": {
+    "128": "128icon.png"
+  },
+  "permissions": [
+    "activeTab"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+
+  "author": "hlaxkar@gmail.com",
+
+  "homepage_url": "https://github.com/hlaxkar/Discord-Download-button"
+}
