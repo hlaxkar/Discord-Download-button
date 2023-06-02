@@ -8,12 +8,17 @@
     "128": "128icon.png"
   },
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "scripting"
   ],
   "action": {
     "default_popup": "popup.html"
   },
-
+  "background": {
+    "service_worker": "background.js"
+  },
+  
+  
   "author": "hlaxkar@gmail.com",
 
   "homepage_url": "https://github.com/hlaxkar/Discord-Download-button"
