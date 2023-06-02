@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
     btnadder.addEventListener("click", () => {
       chrome.runtime.sendMessage({
         action: "addDownloadBtn",
+        tabid: tab.id
         
       });
     });

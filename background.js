@@ -1,23 +1,26 @@
-chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+  chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     if (message.action === "addDownloadBtn") {
-       console.log('message: ',message,'sender: ',sender,'sendResponse: ',sendResponse);
-      scripting.executeScript({
-        target: {tabId: sender.id, allFrames: true},
-        code: addDownloadBtn.toString() 
-      });
+      //  console.log('message: ',message,'sender: ',sender,'sendResponse: ',sendResponse);
+      chrome.scripting.executeScript({
+        target: {tabId: message.tabid, allFrames: true},
+        func: addDownloadBtn
+      }).then(() => console.log("injected script file"));;
     }
   });
  
 
   function addDownloadBtn() {
     console.log("adding buttons");
-    var items = document.getElementsByClassName("contents-2MsGLg");
+    var items = document.getElementsByClassName("mediaAttachmentsContainer-1WGRWy");
     if (items) {
       console.log("items found", items);
   
-      for (let i = 0; i < headers.length; i++) {
-        let elem = headers[i];
+      for (let i = 0; i < items.length; i++) {
+        let elem = items[i];
+        console.log('adding button to item number:', i);
         if (elem.classList.contains("hasDownloadBtn")) {
+        console.log('already has a button at:', i);
+
           continue;
         }
         let btn = document.createElement("button");
