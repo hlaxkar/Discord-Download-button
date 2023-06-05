@@ -6,9 +6,13 @@ document.addEventListener("DOMContentLoaded", function () {
     var url = tab.url;
     if (url.startsWith("https://discord.com/channels")) {
       document.getElementById("tabName").textContent = "Hello!";
+      document.getElementById("condition").style = "display: block";
+
     } else {
       var tabName = tab.title;
       document.getElementById("tabName").textContent = tabName;
+      document.getElementById("condition").style = "display: none";
+
     }
     var btn = document.getElementById("downloadbtn");
     btn.addEventListener("click", function () {

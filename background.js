@@ -1,6 +1,6 @@
   chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     if (message.action === "addDownloadBtn") {
-      //  console.log('message: ',message,'sender: ',sender,'sendResponse: ',sendResponse);
+      
       chrome.scripting.executeScript({
         target: {tabId: message.tabid, allFrames: true},
         func: addDownloadBtn
@@ -28,11 +28,53 @@
         btn.classList.add("DownloadBtn");
         btn.innerText = "Download";
         btn.onclick = (event) => {
-          console.log(event.parentNode);
+          console.log('Download button clicked');
+          let parent = event.target.parentNode;
+          let containers = parent.getElementsByClassName("lazyImg-ewiNCh");
+          
+
+          for (let i = 0; i < containers.length; i++) {
+            let downloadLink = containers[i].src.split("?")[0];
+           
+            console.log(downloadLink);
+            fetch(downloadLink)
+              .then((response) => response.blob())
+              .then((blob) => {
+                const url = URL.createObjectURL(blob);
+                console.log('File Recieved, adding anchor for:', i);
+                const link = document.createElement("a");
+                link.href = url;
+                link.download = `image_${i + 1}.jpg`;
+                link.click();
+        
+                URL.revokeObjectURL(url);
+              });
+          }
         };
+        // btn.onclick = sayhello
   
         elem.appendChild(btn);
         console.log("Button added");
       }
+    }
+  }
+
+  function download(containers) {
+    // let containers = document.getElementsByClassName("lazyImg-ewiNCh");
+    for (let i = 0; i < containers.length; i++) {
+      let downloadLink = containers[i].src.split("?")[0];
+     
+      console.log(downloadLink);
+      fetch(downloadLink)
+        .then((response) => response.blob())
+        .then((blob) => {
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement("a");
+          link.href = url;
+          link.download = `image_${i + 1}.jpg`;
+          link.click();
+  
+          URL.revokeObjectURL(url);
+        });
     }
   }

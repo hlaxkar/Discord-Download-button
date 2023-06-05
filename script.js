@@ -1,18 +1,26 @@
 // Import stylesheets
-
+function sayhello(){
+  console.log('Hello Everyone, thanks for pressing the button!');
+}
 // Write Javascript code!
+console.log('File loaded');
 
-function download() {
-  let containers = document.getElementsByClassName("lazyImg-ewiNCh");
+
+function download(event) {
+  console.log('Download button clicked');
+  let parent = event.target.parentNode;
+  let containers = parent.getElementsByClassName("lazyImg-ewiNCh");
+  
+
   for (let i = 0; i < containers.length; i++) {
-    let linker = containers[i].src.split("?")[0];
-    // downloadFile();
-    // link.dispatchEvent(new MouseEvent('click'));
-    console.log(linker);
-    fetch(linker)
+    let downloadLink = containers[i].src.split("?")[0];
+   
+    console.log(downloadLink);
+    fetch(downloadLink)
       .then((response) => response.blob())
       .then((blob) => {
         const url = URL.createObjectURL(blob);
+        console.log('File Recieved, adding anchor for:', i);
         const link = document.createElement("a");
         link.href = url;
         link.download = `image_${i + 1}.jpg`;
@@ -21,7 +29,8 @@ function download() {
         URL.revokeObjectURL(url);
       });
   }
-}
+  }
+
 // let headers = document.getElementsByClassName('header-2jRmjb');
 // addBtn(headers);
 
