@@ -1,26 +1,32 @@
 // Import stylesheets
-function sayhello(){
-  console.log('Hello Everyone, thanks for pressing the button!');
+function sayhello() {
+  console.log("Hello Everyone, thanks for pressing the button!");
 }
 // Write Javascript code!
-console.log('File loaded');
+console.log("File loaded");
 
+
+function senddownload(event) {
+  console.log('senddownload executed');
+  chrome.runtime.sendMessage({
+    action: "download",
+    event: event
+  });
+}
 
 function download(event) {
-  console.log('Download button clicked');
+  console.log("Download button clicked");
   let parent = event.target.parentNode;
   let containers = parent.getElementsByClassName("lazyImg-ewiNCh");
-  
 
   for (let i = 0; i < containers.length; i++) {
     let downloadLink = containers[i].src.split("?")[0];
-   
     console.log(downloadLink);
     fetch(downloadLink)
       .then((response) => response.blob())
       .then((blob) => {
         const url = URL.createObjectURL(blob);
-        console.log('File Recieved, adding anchor for:', i);
+        console.log("File Recieved, adding anchor for:", i);
         const link = document.createElement("a");
         link.href = url;
         link.download = `image_${i + 1}.jpg`;
@@ -29,13 +35,15 @@ function download(event) {
         URL.revokeObjectURL(url);
       });
   }
-  }
+}
 
 // let headers = document.getElementsByClassName('header-2jRmjb');
 // addBtn(headers);
 
 function addDownloadBtn() {
+  console.log("addDownloadBtn() is executing");
   items = document.getElementsByClassName("contents-2MsGLg");
+  console.log("Items: ", items);
 
   addBtn(items);
 }

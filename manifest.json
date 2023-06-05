@@ -8,10 +8,12 @@
     "128": "128icon.png"
   },
   "permissions": [
+    "downloads",
     "activeTab",
     "scripting",
     "tabs",
     "storage"
+    
   ],
   "action": {
     "default_popup": "popup.html"
