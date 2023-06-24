@@ -23,9 +23,10 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*.discord.com/channels*"], 
+      "matches": ["*://*.discord.com/channels*","<all_urls>"], 
+      
 
-      "js": ["script.js"]
+      "js": ["script.js","test.js"]
     }
   ],
   
