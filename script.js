@@ -91,6 +91,11 @@ function addlistitems() {
 
 setTimeout(() => {
   console.log("15 sec complete");
+
+  const chatType  =document.getElementsByClassName(
+    "content-1SgpWY"
+  )[0];
+  
   const mainApp = document.getElementsByClassName(
     "content-1jQy2l"
   )[0];
@@ -131,8 +136,10 @@ console.log('mutation fired in childList');
     });
   });
   
+if(mainApp){
 
   serverObserver.observe(mainApp,{childList:true})
+}
 }, 15000);
 
 // // Select the node that will be observed for mutations
