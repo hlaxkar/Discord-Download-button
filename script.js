@@ -1,9 +1,4 @@
-// Import stylesheets
-function sayhello() {
-  console.log("Hello Everyone, thanks for pressing the button!");
-}
-// Write Javascript code!
-console.log("File loaded");
+
 
 
 function senddownload(event) {
@@ -75,4 +70,25 @@ function addlistitems() {
   console.log(body);
   body.appendChild(item);
 }
-// downloadeds();s
+
+setTimeout(()=>{
+
+  console.log('script excecuted after 5sec');
+},5000)
+setTimeout(()=>{
+
+  console.log('script excecuted after 10sec');
+},10000)
+setTimeout(()=>{
+
+  console.log('script excecuted after 15sec');
+},15000)
+// // Select the node that will be observed for mutations
+// const targetNode = document.getElementsByClassName('content-1SgpWY')
+
+// // Options for the observer (which mutations to observe)
+// const config = { attributes: true, childList: true, subtree: true };
+
+
+
+

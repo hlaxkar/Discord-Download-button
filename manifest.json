@@ -23,10 +23,10 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*.discord.com/channels*","<all_urls>"], 
+      "matches": ["*://*.discord.com/channels*","https://discord.com/channels/290760234710990848/322410457874825217"], 
       
 
-      "js": ["script.js","test.js"]
+      "js": ["script.js"]
     }
   ],
   
