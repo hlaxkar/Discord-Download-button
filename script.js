@@ -91,12 +91,31 @@ function addlistitems() {
 
 setTimeout(() => {
   console.log("15 sec complete");
-  const app = document.getElementsByClassName(
-    "scrollerContent-2SW0kQ content-yjf30S "
+  const mainApp = document.getElementsByClassName(
+    "content-1jQy2l"
+  )[0];
+  
+
+const serverObserver  = new MutationObserver(()=>{
+console.log('mutation fired in childList');
+  const chatContainer = document.getElementsByClassName(
+    "scrollerContent-2SW0kQ content-yjf30S"
   )[0].children[0];
+  if (chatContainer) {
+    console.log("chatContainer found");
+    items = document.getElementsByClassName("mediaAttachmentsContainer-1WGRWy");
+    if (items) {
+      console.log("first items: ", items);
+      addBtn(items);
+    }
+
+    mutationObserver.observe(chatContainer, { childList: true });
+  }
+});
+
+
+
   const mutationObserver = new MutationObserver((entries) => {
-    // console.log("Mutation observerd:");
-    // console.log(entries);
     console.log("Mutation occured");
     entries.forEach((record) => {
       console.log("Record:", record);
@@ -108,21 +127,12 @@ setTimeout(() => {
           console.log("Items: ", item);
           addBtn(item);
         }
-      }
-     
-      
+      }   
     });
   });
-  if (app) {
-    console.log("app found");
-    items = document.getElementsByClassName("mediaAttachmentsContainer-1WGRWy");
-    if (items) {
-      console.log("first items: ", items);
-      addBtn(items);
-    }
+  
 
-    mutationObserver.observe(app, { childList: true });
-  }
+  serverObserver.observe(mainApp,{childList:true})
 }, 15000);
 
 // // Select the node that will be observed for mutations
