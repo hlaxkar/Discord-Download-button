@@ -23,7 +23,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*.discord.com/channels*","https://discord.com/channels/290760234710990848/322410457874825217"], 
+      "matches": ["*://*.discord.com/channels*"], 
       
 
       "js": ["script.js"]
