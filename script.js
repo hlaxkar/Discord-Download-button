@@ -91,6 +91,14 @@ function addlistitems() {
 setTimeout(() => {
   console.log("15 sec complete");
 
+  var style = document.createElement('style');
+  style.type = 'text/css';
+  style.innerHTML = '.DownloadBtn { padding: 4px; background: #b5bac1; transition: all 0.2s ease;    font-weight: bold; } .DownloadBtn:hover{background:white}';
+
+  document.getElementsByTagName('head')[0].appendChild(style);
+
+
+
   const chatType  =document.getElementsByClassName(
     "content-1SgpWY"
   )[0];
