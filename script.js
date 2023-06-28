@@ -29,8 +29,7 @@ function download(event) {
   }
 }
 
-// let headers = document.getElementsByClassName('header-2jRmjb');
-// addBtn(headers);
+
 
 function addDownloadBtn() {
   console.log("addDownloadBtn() is executing");
@@ -43,9 +42,9 @@ function addDownloadBtn() {
 function addBtn(items) {
   for (let i = 0; i < items.length; i++) {
     let elem = items[i];
-    console.log("adding button to item number:", i);
+    // console.log("adding button to item number:", i);
     if (elem.classList.contains("hasDownloadBtn")) {
-      console.log("already has a button at:", i);
+      // console.log("already has a button at:", i);
 
       continue;
     }
@@ -54,7 +53,7 @@ function addBtn(items) {
     btn.classList.add("DownloadBtn");
     btn.innerText = "Download";
     btn.onclick = (event) => {
-      console.log("Download button clicked");
+      // console.log("Download button clicked");
       let parent = event.target.parentNode;
       let containers = parent.getElementsByClassName("lazyImg-ewiNCh");
 
@@ -66,7 +65,7 @@ function addBtn(items) {
           .then((response) => response.blob())
           .then((blob) => {
             const url = URL.createObjectURL(blob);
-            console.log("File Recieved, adding anchor for:", i);
+            // console.log("File Recieved, adding anchor for:", i);
             const link = document.createElement("a");
             link.href = url;
             link.download = filename;
@@ -77,7 +76,7 @@ function addBtn(items) {
     };
 
     elem.appendChild(btn);
-    console.log("Button added");
+    // console.log("Button added");
   }
 }
 
@@ -91,6 +90,14 @@ function addlistitems() {
 
 setTimeout(() => {
   console.log("15 sec complete");
+
+  var style = document.createElement('style');
+  style.type = 'text/css';
+  style.innerHTML = '.DownloadBtn { padding: 4px; background: #b5bac1; transition: all 0.2s ease;    font-weight: bold; } .DownloadBtn:hover{background:white}';
+
+  document.getElementsByTagName('head')[0].appendChild(style);
+
+
 
   const chatType  =document.getElementsByClassName(
     "content-1SgpWY"
@@ -110,7 +117,7 @@ console.log('mutation fired in childList');
     console.log("chatContainer found");
     items = document.getElementsByClassName("mediaAttachmentsContainer-1WGRWy");
     if (items) {
-      console.log("first items: ", items);
+      // console.log("first items: ", items);
       addBtn(items);
     }
 
@@ -123,13 +130,13 @@ console.log('mutation fired in childList');
   const mutationObserver = new MutationObserver((entries) => {
     console.log("Mutation occured");
     entries.forEach((record) => {
-      console.log("Record:", record);
+      // console.log("Record:", record);
       for(let i=0; i<record.addedNodes.length;i++){
       let item
         
         item = record.addedNodes[i].getElementsByClassName("mediaAttachmentsContainer-1WGRWy");
         if (item) {
-          console.log("Items: ", item);
+          // console.log("Items: ", item);
           addBtn(item);
         }
       }   
