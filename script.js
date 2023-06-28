@@ -106,7 +106,7 @@ setTimeout(() => {
   const mainApp = document.getElementsByClassName(
     "content-1jQy2l"
   )[0];
-  
+  const chatTypeObserver = new MutationObserver(()=>{})
 
 const serverObserver  = new MutationObserver(()=>{
 console.log('mutation fired in childList');
@@ -148,9 +148,3 @@ if(mainApp){
   serverObserver.observe(mainApp,{childList:true})
 }
 }, 15000);
-
-// // Select the node that will be observed for mutations
-// const targetNode = document.getElementsByClassName('content-1SgpWY')
-
-// // Options for the observer (which mutations to observe)
-// const config = { attributes: true, childList: true, subtree: true };
