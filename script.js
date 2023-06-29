@@ -29,8 +29,6 @@ function download(event) {
   }
 }
 
-
-
 function addDownloadBtn() {
   console.log("addDownloadBtn() is executing");
   items = document.getElementsByClassName("contents-2MsGLg");
@@ -91,60 +89,70 @@ function addlistitems() {
 setTimeout(() => {
   console.log("15 sec complete");
 
-  var style = document.createElement('style');
-  style.type = 'text/css';
-  style.innerHTML = '.DownloadBtn { padding: 4px; background: #b5bac1; transition: all 0.2s ease;    font-weight: bold; } .DownloadBtn:hover{background:white}';
+  var style = document.createElement("style");
+  style.type = "text/css";
+  style.innerHTML =
+    ".DownloadBtn { padding: 4px; background: #b5bac1; transition: all 0.2s ease;    font-weight: bold; } .DownloadBtn:hover{background:white}";
 
-  document.getElementsByTagName('head')[0].appendChild(style);
+  document.getElementsByTagName("head")[0].appendChild(style);
 
+  const chatType = document.getElementsByClassName("content-1SgpWY")[0];
 
-
-  const chatType  =document.getElementsByClassName(
-    "content-1SgpWY"
-  )[0];
   
-  const mainApp = document.getElementsByClassName(
-    "content-1jQy2l"
-  )[0];
-  const chatTypeObserver = new MutationObserver(()=>{})
-
-const serverObserver  = new MutationObserver(()=>{
-console.log('mutation fired in childList');
-  const chatContainer = document.getElementsByClassName(
-    "scrollerContent-2SW0kQ content-yjf30S"
-  )[0].children[0];
-  if (chatContainer) {
-    console.log("chatContainer found");
-    items = document.getElementsByClassName("mediaAttachmentsContainer-1WGRWy");
-    if (items) {
-      // console.log("first items: ", items);
-      addBtn(items);
+  
+  const chatTypeObserver = new MutationObserver((records) => {
+for(let record of records){
+  if(record.addedNodes.length>0){
+    for(let item of record.addedNodes){
+      if(item.className=='chat-2ZfjoI'){
+        const mainApp = document.getElementsByClassName("content-1jQy2l")[0];
+        if (mainApp) {
+          serverObserver.observe(mainApp, { childList: true });
+        }
+      }
     }
-
-    mutationObserver.observe(chatContainer, { childList: true });
   }
-});
+}
+  });
 
 
+  const serverObserver = new MutationObserver(() => {
+    console.log("mutation fired in childList");
+    const chatContainer = document.getElementsByClassName(
+      "scrollerContent-2SW0kQ content-yjf30S"
+    )[0].children[0];
+    if (chatContainer) {
+      console.log("chatContainer found");
+      items = document.getElementsByClassName(
+        "mediaAttachmentsContainer-1WGRWy"
+      );
+      if (items) {
+        // console.log("first items: ", items);
+        addBtn(items);
+      }
+
+      mutationObserver.observe(chatContainer, { childList: true });
+    }
+  });
 
   const mutationObserver = new MutationObserver((entries) => {
     console.log("Mutation occured");
     entries.forEach((record) => {
       // console.log("Record:", record);
-      for(let i=0; i<record.addedNodes.length;i++){
-      let item
-        
-        item = record.addedNodes[i].getElementsByClassName("mediaAttachmentsContainer-1WGRWy");
+      for (let i = 0; i < record.addedNodes.length; i++) {
+        let item;
+
+        item = record.addedNodes[i].getElementsByClassName(
+          "mediaAttachmentsContainer-1WGRWy"
+        );
         if (item) {
           // console.log("Items: ", item);
           addBtn(item);
         }
-      }   
+      }
     });
   });
-  
-if(mainApp){
 
-  serverObserver.observe(mainApp,{childList:true})
-}
+  
+  chatTypeObserver.observe(chatType,{childList:true});
 }, 15000);
